@@ -1,8 +1,14 @@
-let string = "5 + 10";
+function calculator(string) {
+// let string = "5.4 / gf";
 const expression = string.split(' ');
-const num1 = Number(expression[0]);
+const num1 = Math.round(Number(expression[0]));
 const operator = expression[1];
-const num2 = Number(expression[2]);
+const num2 = Math.round(Number(expression[2]));
+
+if(String(num1) === "NaN" || String(num2) === "NaN"){
+    return 'throws Error';
+};
+
 
 let result;
 switch(operator){
@@ -20,6 +26,14 @@ switch(operator){
     break;
 }
 
+result = Math.round(result);
 
-console.log(result);
-console.log(num1);
+if (result < 1){
+    result = 0
+}
+
+
+let answer = String(result);
+console.log(answer);
+};
+console.log(calculator("5.4 / 10"));
