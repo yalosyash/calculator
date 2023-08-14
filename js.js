@@ -26,9 +26,14 @@ function calculator(string) {
             break;
             default:
                 console.log("it's not a method")
-                return error;
         }
-        method < 1 ?  method = 0 : method = Math.floor(method);
+        if (String(Number(method)) === "NaN") {
+            method = error;
+        }else if (method < 1) {
+            method = 0
+        } else {
+            method = Math.floor(method);
+        }
     };
     const ifArabic = () => {
         num1 = Math.round(Number(a)); //actions for "a"
@@ -38,7 +43,7 @@ function calculator(string) {
             console.log("it's Arabic numbers")
         } else {
             console.log("it's not a numbers")
-            return error;
+            method = error;
             }
     }
     const ifRome = () => {
@@ -57,7 +62,7 @@ function calculator(string) {
     ifRome();
     return(String(method));
 }; // end of a main function
-console.log(calculator("5 / 6"));
+console.log(calculator("5 f 0"));
 
 // для проверки
 // числа < 0.5
