@@ -50,9 +50,9 @@ function calculator(string) {
         method = result;
     };
     const ifArabic = () => {
-        num1 = Math.round(Number(a));
-        num2 = Math.round(Number(c));
-        if(String(num1) !== "NaN" && String(num2) !== "NaN"){
+        num1 = Math.floor(Number(a));
+        num2 = Math.floor(Number(c));
+        if(String(num1) !== "NaN" && String(num2) !== "NaN" && num1 <= 10 && num2 <= 10){
             ifMethod();
         } 
         else {
@@ -76,11 +76,4 @@ function calculator(string) {
         return;
     };
 }; // end of a main function
-console.log(calculator('50 + '));
-
-// для проверки
-// числа < 0.5
-// числа > 0.5
-// числа < 1
-// Числа > 1
-
+console.log(calculator('10 + 10'));
