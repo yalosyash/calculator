@@ -6,27 +6,16 @@ function calculator(string) {
     const b = expression[1];
     const c = expression[2];
     const romNum = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
-    const error = 'Throws Error';
     let num1;
     let num2;
     let method;
-
-    const romeConvert = () => {
-        const arrInt = [1,4,5,9,10,40,50,90,100];
-        const arrRom = ["I","IV","V","IX","X","XL","L","XC","C"];
-        let result = "";
-        let n = arrInt.length - 1;
-        while (method > 0) {
-            if (method >= arrInt[n]) {
-                result += arrRom[n];
-                method -= arrInt[n];
-            }
-            else n--;
-        }
-        console.log(result);
-        method = result;
-    };
-
+    const ifRome = () => {
+        ifMethod();
+        if (method < 1){
+            method = "";
+            };
+        romeConvert();
+        };
     const ifMethod = () => {
         switch(b){
             case "+":
@@ -42,49 +31,56 @@ function calculator(string) {
                 method = num1*num2;
             break;
             default:
-                console.log("it's not a method");
-        }
-        if (String(Number(method)) === "NaN") {
-            method = error;
-        }else if (method < 1) {
-            method = Math.floor(method);
-        }
+                throw new Error("it's not a method");
+        };
+        method = Math.floor(method);
     };
-
+    const romeConvert = () => {
+        const arrInt = [1,4,5,9,10,40,50,90,100];
+        const arrRom = ["I","IV","V","IX","X","XL","L","XC","C"];
+        let result = "";
+        let n = arrInt.length - 1;
+        while (method > 0) {
+            if (method >= arrInt[n]) {
+                result += arrRom[n];
+                method -= arrInt[n];
+            } 
+            else n--;
+        };
+        method = result;
+    };
     const ifArabic = () => {
-        num1 = Math.round(Number(a)); //actions for "a"
-        num2 = Math.round(Number(c)); //actions for "c"
+        num1 = Math.round(Number(a));
+        num2 = Math.round(Number(c));
         if(String(num1) !== "NaN" && String(num2) !== "NaN"){
             ifMethod();
-            console.log("it's Arabic numbers");
-        } else {
-            console.log("it's not a numbers");
-            method = error;
-            }
-    }
-
-    const ifRome = () => {
-        if (romNum.includes(a) && romNum.includes(c)) {
-            num1 = romNum.indexOf(a)+1; //actions for "a"
-            num2 = romNum.indexOf(c)+1; //actions for "c"
-            ifMethod(); //operation
-            if (method < 1){
-                method = "";
-            }; 
-            romeConvert();
-            console.log("it's Roman numbers")
+        } 
+        else {
+            throw new Error("it's not an Arabic numbers");
+        };
+    };
+    try{
+        if (!string || string === "" || a === "" || b === "" || c === "") {
+            throw Error("it's not an expression");
+        } else if (romNum.includes(a) && romNum.includes(c)) {
+            num1 = romNum.indexOf(a)+1;
+            num2 = romNum.indexOf(c)+1;
+        ifRome();
         } else {
             ifArabic();
         };
+        return(String(method));
+    }
+    catch (error){
+        console.error(error);
+        return;
     };
-    
-    ifRome();
-    return(String(method));
 }; // end of a main function
-console.log(calculator("x * x"));
+console.log(calculator('50 + '));
 
 // для проверки
 // числа < 0.5
 // числа > 0.5
 // числа < 1
 // Числа > 1
+
