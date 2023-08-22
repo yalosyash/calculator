@@ -1,5 +1,4 @@
 function calculator(string) {
-    // expect string "a b c" - example "5 + 10"
     string = string.toUpperCase();
     const expression = string.split(' ');
     const a = expression[0];
@@ -44,8 +43,7 @@ function calculator(string) {
             if (method >= arrInt[n]) {
                 result += arrRom[n];
                 method -= arrInt[n];
-            } 
-            else n--;
+            } else n--;
         };
         method = result;
     };
@@ -54,26 +52,21 @@ function calculator(string) {
         num2 = Math.floor(Number(c));
         if(String(num1) !== "NaN" && String(num2) !== "NaN" && num1 <= 10 && num2 <= 10){
             ifMethod();
-        } 
-        else {
+        } else {
             throw new Error("it's not an Arabic numbers");
         };
     };
-    try{
-        if (!string || string === "" || a === "" || b === "" || c === "") {
-            throw Error("it's not an expression");
-        } else if (romNum.includes(a) && romNum.includes(c)) {
-            num1 = romNum.indexOf(a)+1;
-            num2 = romNum.indexOf(c)+1;
-        ifRome();
-        } else {
-            ifArabic();
-        };
-        return(String(method));
-    }
-    catch (error){
-        console.error(error);
-        return;
+    if (!string || string === "" || expression.length > 3 || a === "" || b === "" || c === "" || a === "0" || c === "0") {
+        throw new Error("it's not valid");
+    } else if (romNum.includes(a) && romNum.includes(c)) {
+        num1 = romNum.indexOf(a)+1;
+        num2 = romNum.indexOf(c)+1;
+    ifRome();
+    } else {
+        ifArabic();
     };
-}; // end of a main function
-console.log(calculator('10 + 10'));
+    return(String(method));
+};
+//expect string "a b c" - example "5 + 10"
+//console.log(calculator('enter your exp'));
+console.log(calculator('4 / 0'));
