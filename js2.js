@@ -5,26 +5,31 @@ const calc = (exp) => {
 	})(exp);
 	let string = exp;
 	let str = "";
+	let num;
 
 	const parseInteg = () => {
 		console.log(str);
 	}
-	const parseStr = () => {
-		console.log(str)
+	const 
+
+	const replacerStr = () => {
+		parseInteg();
+		string = string.replace(str, num);
 	}
 	const isBrackets = () => {
 		for (let i = string.length - 1; i >= 0; i--) {
-			let n = 1;
+			let n = 0;
 			if (string[i] === "("){
 				do {
 					str += string[i+n];
 					n++;
-				} while (string[i+n] !== ")");
+				} while (string[i+n-1] !== ")");
 				return str;
 			}
 		}
 	}
-	isBrackets()? parseStr():console.log(2)
+	isBrackets()? replacerStr():console.log(2)
+
 };
 console.log(calc("2-5*((5+3)*4)")); //2-5*((5+3)*4)
 // a+b*c-d/e+(f-g*(j+k))-i*(x-z)
