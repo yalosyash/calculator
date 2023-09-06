@@ -69,4 +69,4 @@ function calculator(string) {
 };
 //expect string "a b c" - example "5 + 10"
 //console.log(calculator('enter your exp'));
-console.log(calculator('4 / 0'));
+// console.log(calculator('4 / 0'));
