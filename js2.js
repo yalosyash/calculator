@@ -25,6 +25,7 @@ const calc = (exp) => {
 				num = a-b;
 			break;
 		}
+		console.log(num);
 	}
 	const parseIntegs = () => {
 		num = str.split(str[oper]);
@@ -32,44 +33,51 @@ const calc = (exp) => {
 	const parseOper = () =>{
 		const regOper = /[+-\/*]/g;
 		oper = str.search(regOper);
+		console.log(str[oper])
 	}
 	const isFirst = () => {
 		const srcExp1 = str.search(/[*/]/);
 		const srcExp2 = str.search(/[+-]/);
 		const notNumber = ["*","/","+","-","(",")"];
 		let strNew = "";
-		let n = 1;
 		let srcExp;
 		srcExp1 !==-1 ? srcExp = srcExp1 : srcExp = srcExp2
 		strNew = str[srcExp];
-		do {
+		let n = 1;
+		while (!notNumber.includes(str[srcExp+n]) && srcExp+n <= str.length -1){
 			strNew += str[srcExp+n];
 			n++;
-		} while (!notNumber.includes(str[srcExp+n]) && str[srcExp+n] !== str.length -1)
+		}
 		n = -1;
-		do {
+		while (!notNumber.includes(str[srcExp+n]) && srcExp+n >= 0){
 			strNew = str[srcExp+n] + strNew;
+			console.log(strNew);
 			n--;
-		} while (!notNumber.includes(str[srcExp+n]) && str[srcExp+n] !== str[0])
+		}
 		str = strNew;
 		parseOper();
 		parseIntegs();
 		action();
+		console.log(str)
 	}
 	const replacerStr = () => {
-		if(removeBrackets()){
+		console.log(str)
+		if(checkBrackets()){
 			string = string.replace(str, str.slice(1, -1));
-			return;
+			console.log(string)
+			str = string;
 		}
 		isFirst();
 		string = string.replace(str, num);
-		console.log(str)
+		console.log(string);
 		str = "";
 		num = undefined;
+		checkAction();
 	}
-	const removeBrackets = () => {
+	const checkBrackets = () => {
 		const check = str.slice(1, -1);
-		if (Number(check)) {
+		const regNum = check.search(/[^0-9]/);
+		if (regNum == -1) {
 			return true;
 		} return false;
 	};
@@ -90,24 +98,28 @@ const calc = (exp) => {
 		} else return false;
 	}
 	const structure = () => {
-		const regNum = string.search(/[^0-9]/);
-		while (regNum !== -1){
-			if (isBrackets()){
-				replacerStr();
-			} else {
-				str = string;
-				replacerStr();
-			}
-		console.log(exp);
-		console.log(string);
-		console.log(str);
-		console.log(num);
+		if (isBrackets()){
+			replacerStr();
+		} else {
+			str = string;
+			replacerStr();
 		}
 	}
-	// structure();
+	const checkAction = () => {
+		const regNum = string.search(/[^0-9]/);
+		let boolean
+		if (regNum !== -1) {
+			boolean = true;
+			console.log(boolean);
+			structure();
+		} else {
+			boolean = false;
+			console.log(false)	
+		}
+	}
+	checkAction();
 	return string;
 };
-console.log(calc("2+5*(5+2*2)-1")); //2-5*(51+234*5678+1)
+console.log(calc("2+5*4-4/2+(5-2*(1+1))-1*(5-4)")); //2+5*(5+2*2)-1
 // a+b*c-d/e+(f-g*(j+k))-i*(x-z)
 // 363636+484884*362662-744774/2626626+(252662-47773*(362662+466363))-277373*(3737-27272)
-//sdfgsdgf
