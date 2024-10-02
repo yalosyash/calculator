@@ -67,6 +67,6 @@ function calculator(string) {
     };
     return(String(method));
 };
-//expect string "a b c" - example "5 + 10"
-//console.log(calculator('enter your exp'));
-// console.log(calculator('4 / 0'));
+// expect string "a b c" - example "5 + 10"
+// console.log(calculator('enter your exp'));
+// console.log(calculator('4 + 5')); //9
